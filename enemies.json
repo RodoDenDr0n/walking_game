@@ -1,0 +1,10 @@
+{
+"1":{"health":[2, 4], "damage":[2, 4], "protection":[0, 1]},
+"2":{"health":[3, 5], "damage":[3, 5], "protection":[1, 2]},
+"3":{"health":[4, 6], "damage":[3, 5], "protection":[2, 2]},
+"4":{"health":[5, 7], "damage":[3, 5], "protection":[2, 3]},
+"5":{"health":[6, 8], "damage":[3, 5], "protection":[3, 3]},
+"6":{"health":[7, 9], "damage":[3, 5], "protection":[3, 4]},
+"7":{"health":[8, 10], "damage":[3, 5], "protection":[4, 4]},
+"8":{"health":[9, 11], "damage":[3, 5], "protection":[4, 5]}
+}

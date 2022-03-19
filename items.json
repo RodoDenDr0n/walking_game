@@ -1,0 +1,250 @@
+{
+"weapons": {
+	"wooden stick": {
+		"damage":1, 
+		"protection":0,
+		"price":1
+		},
+	"spoon": {
+		"damage":1, 
+		"protection":0,
+		"price":2
+		},
+	"rubber duck": {
+		"damage":1,
+		"protection":0,
+		"price":5
+		},
+	"frying pan": {
+		"damage":2, 
+		"protection":0,
+		"price":4
+		},
+	"fork": {
+		"damage":2,
+		"protection":0,
+		"price":2
+		},
+	"angry kitten": {
+		"damage":2, 
+		"protection":0,
+		"price":0
+		},
+	"toy truck": {
+		"damage":2,
+		"protection":0,
+		"price":5
+		},
+	"fishing rod": {
+		"damage":3,
+		"protection":0,
+		"price":5
+		},
+	"solid fish": {
+		"damage":3, 
+		"protection":0,
+		"price":3
+		},
+	"moldy rock":{
+		"damage":3,
+		"protection":0,
+		"price":5
+		},
+	"knife": {
+		"damage":4, 
+		"protection":0,
+		"price":3
+		},
+	"crowbar": {
+		"damage":4, 
+		"protection":0,
+		"price":3
+		},
+	"baton": {
+		"damage":5, 
+		"protection":0,
+		"price":5
+		},
+	"huge angry dog": {
+		"damage":5,
+		"protection":0,
+		"price":0
+		},
+	"chain": {
+		"damage":5,
+		"protection":0,
+		"price":3
+		},
+	"sword": {
+		"damage":6, 
+		"protection":0,
+		"price":7
+		},
+	"spear": {
+		"damage":6,
+		"protection":0,
+		"price":7
+		},
+	"halbert": {
+		"damage":7,
+		"protection":0,
+		"price":8
+		},
+	"viking axe": {
+		"damage":7,
+		"protection":0,
+		"price":9
+		},
+	"great axe": {
+		"damage":8,
+		"protection":0,
+		"price":9
+		},
+	"great sword": {
+		"damage":8, 
+		"protection":0,
+		"price":8
+		},
+	"legendary sword": {
+		"damage":10, 
+		"protection":0,
+		"price":50
+		}
+	},
+"armour": {
+	"slippers": {
+		"damage":0,
+		"protection":1,
+		"price":2
+		},
+	"funny gogles": {
+		"damage":0,
+		"protection":1,
+		"price":5
+		},
+	"plain shirt": {
+		"damage":0,
+		"protection":1,
+		"price":1
+		},
+	"wooden bucket helmet": {
+		"damage":0,
+		"protection":1,
+		"price":3
+		},
+	"road cone": {
+		"damage":0,
+		"protection":2,
+		"price":3
+		},
+	"wool gloves": {
+		"damage":0,
+		"protection":2,
+		"price":2
+		},
+	"underwear with hearts": {
+		"damage":0,
+		"protection":2,
+		"price":5
+		},
+	"leather jacket": {
+		"damage":0,
+		"protection":2,
+		"price":3
+		},
+	"bucket helmet": {
+		"damage":0,
+		"protection":2,
+		"price":2
+		},
+	"wooden armour": {
+		"damage":0,
+		"protection":3,
+		"price":4
+		},
+	"UCU hoody": {
+		"damage":0,
+		"protection":3,
+		"price":15
+		},
+	"plastic chestplate": {
+		"damage":0,
+		"protection":3,
+		"price":1
+		},
+	"welder helmet": {
+		"damage":0,
+		"protection":3,
+		"price":4
+		},
+	"iron helmet": {
+		"damage":0,
+		"protection":4,
+		"price":5
+		},
+	"thick jacket": {
+		"damage":0,
+		"protection":4,
+		"price":4
+		},
+	"huge boots": {
+		"damage":0,
+		"protection":4,
+		"price":4
+		},
+	"chain gloves": {
+		"damage":0,
+		"protection":4,
+		"price":5
+		},
+	"chainmail": {
+		"damage":0,
+		"protection":5,
+		"price":4
+		},
+	"iron gloves": {
+		"damage":0,
+		"protection":5,
+		"price":5
+		},
+	"iron boots": {
+		"damage":0,
+		"protection":5,
+		"price":5
+		},
+	"iron chestplate": {
+		"damage":0,
+		"protection":6,
+		"price":6
+		},
+	"hardened trousers": {
+		"damage":0,
+		"protection":6,
+		"price":6
+		},
+	"steel underwear": {
+		"damage":0,
+		"protection":6,
+		"price":7
+		},
+	"legendary armour": {
+		"damage":0,
+		"protection":8,
+		"price":50
+		}
+	},
+"potions": {
+	"bear potion": {
+		"description":"increases damage by 0.5 for every lost point of health, effect rounds up for a greater value",
+		"price":100
+		},
+	"porcupine potion": {
+		"description":"increases protection by 0.5 for every lost point of health, effect rounds up for a greater value",
+		"price":100
+		},
+	"healing potion": {
+		"description":"heals player for 3 hp",
+		"price":50
+		}
+	}
+}
