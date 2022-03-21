@@ -6,6 +6,9 @@ class Player:
     """Class representation for player"""
     def __init__(self, backpack, health=10, damage=1, protection=0,
                  weapon=None, armour=None, money=0, level=1, points=0):
+        """
+        Class representation of Player
+        """
         self.health = health
         self.damage = damage
         self.protection = protection
@@ -144,6 +147,9 @@ class Player:
 class Backpack:
     """Class representation for backpack"""
     def __init__(self, equipment=None):
+        """
+        Creates Backpack
+        """
         self.equipment = equipment or {}
 
     def add_item(self, item):
@@ -201,13 +207,13 @@ class Backpack:
             string += colored("\n  Amount: ", "blue") + colored(f"x{count}", attrs=["bold"])
         return string
 
-    def __repr__(self):
-        return f"{self.equipment}"
-
 
 class Shop:
     """Class representation for shop"""
     def __init__(self, backpack, game_player, items_for_sale):
+        """
+        Creates shop
+        """
         self.backpack = backpack
         self.game_player = game_player
         self.items_for_sale = items_for_sale

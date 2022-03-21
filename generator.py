@@ -7,6 +7,9 @@ from random import shuffle
 class Generator:
     """Class representation for object generator"""
     def __init__(self, data=None, generated=None):
+        """
+        Creates Generator class
+        """
         self.data = data
         self.generated = generated
 

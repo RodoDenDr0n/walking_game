@@ -4,6 +4,9 @@ from termcolor import colored
 class Location:
     """Class representation for Location"""
     def __init__(self, name, number, map=None, shop=False, boss=False, linked=None):
+        """
+        Creates Location class
+        """
         self.name = name
         self.number = number
         self.map = map or []
@@ -40,6 +43,7 @@ class Location:
 
 
 class Compass:
+    """Class representation of Compass"""
     def __str__(self):
         """
         String representation for Compass class
@@ -63,8 +67,11 @@ class Compass:
 
 
 class Map:
-    """Class for Map representation"""
+    """Class representation of Map"""
     def __init__(self, map):
+        """
+        Creates Map
+        """
         self.map = map
 
     def __str__(self):

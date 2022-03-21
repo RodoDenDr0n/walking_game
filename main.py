@@ -20,6 +20,9 @@ shop = Shop(backpack, game_player, item_generator.generated["potions"])
 class Game:
     """Class representation for Game"""
     def __init__(self, shop, current_location, locations, player, defeated_bosses=0):
+        """
+        Creates Game
+        """
         self.item_generator = item_generator
         self.shop = shop
         self.current_location = current_location

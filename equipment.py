@@ -14,11 +14,14 @@ class Item:
 class Weaponry(Item):
     """Class for Weaponry representation"""
     def __init__(self, name, damage, protection, price):
+        """
+        Creates Weaponry
+        """
         super().__init__(name, damage, protection, None, price)
 
     def __str__(self):
         """
-        String class representation
+        String representation of Weaponry
         """
         return colored("\n [+] ", "green") + \
             colored(f"{self.name}:", "magenta") + \
@@ -33,27 +36,39 @@ class Weapon(Weaponry):
         super().__init__(name, damage, None, price)
 
     def __str__(self):
+        """
+        String representation of Weapon
+        """
         return colored("\n [+] ", "green") + \
-              colored(f"{self.name}:", "magenta") + \
-              "\n  - " + colored("damage:", "cyan") + f" {self.damage}" + \
-              "\n  - " + colored("price:", "cyan") + f" {self.price}"
+            colored(f"{self.name}:", "magenta") + \
+            "\n  - " + colored("damage:", "cyan") + f" {self.damage}" + \
+            "\n  - " + colored("price:", "cyan") + f" {self.price}"
 
 
 class Armour(Weaponry):
     """Class for Armour representation"""
     def __init__(self, name, protection, price):
+        """
+        Creates Armour
+        """
         super().__init__(name, None, protection, price)
 
     def __str__(self):
+        """
+        String representation of Armour
+        """
         return colored("\n [+] ", "green") + \
-              colored(f"{self.name}:", "magenta") + \
-              "\n  - " + colored("protection:", "cyan") + f" {self.protection}" + \
-              "\n  - " + colored("price:", "cyan") + f" {self.price}"
+            colored(f"{self.name}:", "magenta") + \
+            "\n  - " + colored("protection:", "cyan") + f" {self.protection}" + \
+            "\n  - " + colored("price:", "cyan") + f" {self.price}"
 
 
 class Potion(Item):
     """Class for Potion representation"""
     def __init__(self, name, description, price):
+        """
+        Creates Potion
+        """
         super().__init__(name, None, None, description, price)
 
     def __str__(self):

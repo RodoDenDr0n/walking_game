@@ -6,6 +6,9 @@ from termcolor import colored
 class Enemy:
     """Class representation for enemy"""
     def __init__(self, health=None, damage=None, protection=None):
+        """
+        Creates Enemy
+        """
         self.health = health
         self.damage = damage
         self.protection = protection
@@ -58,6 +61,9 @@ class Boss(Enemy):
 class Battle:
     """Class for battle representation"""
     def __init__(self, player, enemy):
+        """
+        Creates Battle
+        """
         self.player = player
         self.enemy = enemy
 
