@@ -1,9 +1,9 @@
 from player import Player, Backpack, Shop
 from generator import ItemGenerator, MapGenerator
 from termcolor import colored
-from route import Compass, Map
-from enemies import Enemy, Battle
-from equipment import Weaponry, Weapon, Armour
+from locations_and_mapping import Compass, Map
+from enemies import Enemy, Boss, Battle
+from equipment import Weapon, Armour
 
 backpack = Backpack()
 game_player = Player(backpack)
@@ -16,37 +16,39 @@ locations = map.generated
 
 shop = Shop(backpack, game_player, item_generator.generated["potions"])
 
-# test_weapon = Weaponry("weapon", 5, 0, 10)
-# test_potion = Potion("potion", "potion created for testing", 10)
-# backpack.add_item(test_weapon)
-# backpack.add_item(test_weapon)
-# backpack.add_item(test_potion)
+
 class Game:
-    def __init__(self, shop, current_location, locations, game_player):
+    """Class representation for Game"""
+    def __init__(self, shop, current_location, locations, player, defeated_bosses=0):
         self.item_generator = item_generator
         self.shop = shop
         self.current_location = current_location
         self.locations = locations
-        self.game_player = game_player
+        self.player = player
+        self.defeated_bosses = defeated_bosses
 
-    def proceed_commands(self):
-        pass
-
-    def main(self):
-        command = input("\nEnter the " + colored("command", "green") + ":" +
+    def run(self):
+        """
+        Function that runs the game
+        """
+        command = input("Enter the " + colored("command", "green") + ":" +
                         colored("\n>>> ", "red", attrs=["bold"]))
 
         if command == "sell":
-            return self.shop.sell()
+            if self.current_location.shop:
+                return self.shop.sell()
+            return colored("There is no shop in this location!", "red", attrs=["bold"])
 
         elif command == "buy":
-            return self.shop.buy()
+            if self.current_location.shop:
+                return self.shop.buy()
+            return colored("There is no shop in this location!", "red", attrs=["bold"])
 
         elif command == "backpack":
-            return str(self.game_player.backpack)
+            return str(self.player.backpack)
 
         elif command == "me":
-            return str(self.game_player)
+            return str(self.player)
 
         elif command == "move":
             current_location_map = "\n".join(self.current_location.map)
@@ -59,21 +61,41 @@ class Game:
             for location in locations:
                 if location.number == number:
                     self.current_location = location
-                    return f"You moved {direction}"
+                    return colored(f"You moved {direction}", "green", attrs=["bold"])
             return colored(f"You can't go {direction}", "red", attrs=["bold"])
 
         elif command == "map":
             current_location_map = "\n".join(self.current_location.map)
             return Map(current_location_map)
 
+        elif command == "location":
+            return self.current_location
+
         elif command == "fight":
-            enemy = Enemy.spawn(game_player.level)
+            if self.current_location.boss is True:
+                if self.player.level in [3, 5, 7]:
+                    enemy = Boss.spawn(self.defeated_bosses, "bosses.json")
+                    enemy_type = "boss"
+                else:
+                    return colored("Your level is to low to fight with boss!", "red", attrs=["bold"])
+            else:
+                enemy = Enemy.spawn(game_player.level, "enemies.json")
+                enemy_type = "common"
+
             result = Battle(game_player, enemy).fight()
             if result:
                 game_player.set_default_stats()
                 level_items = item_generator.generated[game_player.level]
+
+                if enemy_type == "common":
+                    game_player.add_points()
+                elif enemy_type == "boss":
+                    game_player.level_up()
+                    self.defeated_bosses += 1
+                    self.current_location.boss = False
                 game_player.get_loot(level_items)
                 return colored("You win!", "green", attrs=["bold"])
+
             game_player.set_default_stats()
             game_player.clean()
             return colored("You lost all your items and level!", "red", attrs=["bold"])
@@ -92,7 +114,7 @@ class Game:
                 equipment_type = Armour
 
             message = colored(f"\nYour {desired_equipment} pieces:", "red", attrs=["bold"])
-            for element in self.game_player.backpack.equipment:
+            for element in self.player.backpack.equipment:
                 if isinstance(element, equipment_type):
                     message += str(element)
             print(message)
@@ -102,6 +124,7 @@ class Game:
                 game_player.equip_weapon(chosen_equipment)
             elif equipment_type == Armour:
                 game_player.equip_armour(chosen_equipment)
+            return colored(f"You equipped {chosen_equipment}!", "green", attrs=["bold"])
 
         elif command == "unequip":
             equipment_proposal = colored("\nWhat do you want to unequip?", "cyan") + \
@@ -118,7 +141,59 @@ class Game:
         else:
             return colored("No such command!", "red", attrs=["bold"])
 
+    def __str__(self):
+        """
+        String representation for class Game
+        """
+        selector = colored("\n [+] ", "green")
+        possible_commands = colored("\nPossible actions:", "cyan", attrs=["bold"]) + \
+            selector + "backpack" + \
+            selector + "me" + \
+            selector + "move" + \
+            selector + "map" + \
+            selector + "location" + \
+            selector + "fight" + \
+            selector + "equip" + \
+            selector + "unequip"
+        if self.current_location.shop:
+            possible_commands += selector + "sell" + \
+                                selector + "buy"
+        return possible_commands
 
-game = Game(shop, locations[0], locations, game_player)
-while True:
-    print(game.main())
+
+class GameCover:
+    """Class representation of Game Cover"""
+    def __str__(self):
+        """
+        String representation of class
+        """
+        cover = \
+            """
+         ██╗       ██╗ █████╗ ███╗  ██╗██████╗ ███████╗██████╗    █████╗ ███╗  ██╗██████╗ 
+         ██║  ██╗  ██║██╔══██╗████╗ ██║██╔══██╗██╔════╝██╔══██╗  ██╔══██╗████╗ ██║██╔══██╗
+         ╚██╗████╗██╔╝███████║██╔██╗██║██║  ██║█████╗  ██████╔╝  ███████║██╔██╗██║██║  ██║
+          ████╔═████║ ██╔══██║██║╚████║██║  ██║██╔══╝  ██╔══██╗  ██╔══██║██║╚████║██║  ██║
+          ╚██╔╝ ╚██╔╝ ██║  ██║██║ ╚███║██████╔╝███████╗██║  ██║  ██║  ██║██║ ╚███║██████╔╝
+           ╚═╝   ╚═╝  ╚═╝  ╚═╝╚═╝  ╚══╝╚═════╝ ╚══════╝╚═╝  ╚═╝  ╚═╝  ╚═╝╚═╝  ╚══╝╚═════╝ 
+        
+         ██████╗██╗      █████╗ ██╗   ██╗ ██████╗ ██╗  ██╗████████╗███████╗██████╗
+        ██╔════╝██║     ██╔══██╗██║   ██║██╔════╝ ██║  ██║╚══██╔══╝██╔════╝██╔══██╗
+        ╚█████╗ ██║     ███████║██║   ██║██║  ██╗ ███████║   ██║   █████╗  ██████╔╝
+         ╚═══██╗██║     ██╔══██║██║   ██║██║  ╚██╗██╔══██║   ██║   ██╔══╝  ██╔══██╗
+        ██████╔╝███████╗██║  ██║╚██████╔╝╚██████╔╝██║  ██║   ██║   ███████╗██║  ██║
+        ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+                """
+        return cover
+
+
+if __name__ == "__main__":
+    game = Game(shop, locations[0], locations, game_player)
+    print(GameCover())
+    current_location_map = "\n".join(locations[0].map)
+    print(Map(current_location_map))
+    while True:
+        if game.defeated_bosses == 3:
+            print(colored("Congratulations on completing the game!", "green", attrs=["bold"]))
+            break
+        print(game)
+        print(game.run())

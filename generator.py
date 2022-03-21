@@ -1,33 +1,54 @@
 import json
 from equipment import Weapon, Armour, Weaponry, Potion
-from route import Location
+from locations_and_mapping import Location
 from random import shuffle
 
 
 class Generator:
+    """Class representation for object generator"""
     def __init__(self, data=None, generated=None):
         self.data = data
         self.generated = generated
 
     def generate_container(self):
+        """
+        Function that is responsible for generating
+        list or dictionary where information is stored
+        """
         pass
 
     def read_file(self, file):
+        """
+        Function that is responsible for reading file
+        """
         with open(file, "r", encoding="utf-8") as json_file:
             data = json.load(json_file)
         self.data = data
 
     def divide_by_purpose(self):
+        """
+        Function that divides data in
+        generated containers by its purpose
+        """
         pass
 
     def generate_objects(self, file):
+        """
+        Function that generates objects
+        """
         self.generate_container()
         self.read_file(file)
         self.divide_by_purpose()
 
 
 class ItemGenerator(Generator):
+    """Class representation for items generator"""
+
     def generate_container(self):
+        """
+        Function that is responsible for generating
+        list or dictionary where information is stored
+        """
         leveled_equipment = {}
         for i in range(1, 9):
             leveled_equipment.setdefault(i, [])
@@ -35,9 +56,16 @@ class ItemGenerator(Generator):
         self.generated = leveled_equipment
 
     def read_file(self, file):
+        """
+        Function that is responsible for reading file
+        """
         super().read_file(file)
 
     def divide_by_purpose(self):
+        """
+        Function that divides data in
+        generated containers by its purpose
+        """
         for value in self.data.values():
             for name, characteristics in value.items():
                 characteristics = tuple(characteristics.values())
@@ -72,17 +100,33 @@ class ItemGenerator(Generator):
                     self.generated["potions"].append(item)
 
     def generate_objects(self, file):
+        """
+        Function that generates objects
+        """
         super().generate_objects(file)
 
 
 class MapGenerator(Generator):
+    """Class representation for items generator"""
+
     def generate_container(self):
+        """
+        Function that is responsible for generating
+        list or dictionary where information is stored
+        """
         self.generated = []
 
     def read_file(self, file):
+        """
+        Function that is responsible for reading file
+        """
         super().read_file(file)
 
     def divide_by_purpose(self):
+        """
+        Function that divides data in
+        generated containers by its purpose
+        """
         streets_list = ["Ivana-Franka Street", "Voloska Street", "Zelena Street", "Paliya Street",
                         "Kostia Levytskoho Street", "Kl'onovycha Street", "Akademika Bohomol'tsya Street",
                         "Volodymyra Vynnychenka Street", "Maksyma Kryvonosa Street", "Ivana Gonty Street",
@@ -93,7 +137,15 @@ class MapGenerator(Generator):
                         "Rynok Square", "Virmenska Street", "Mykoly Kopernyka Street", "Svobody Ave"]
         shuffle(streets_list)
         for key, value in self.data.items():
-            self.generated.append(Location(streets_list[int(key)], int(key), value[0], False, False, value[1]))
+            if int(key) in [2, 14, 18]:
+                self.generated.append(Location(streets_list[int(key)], int(key), value[0], True, False, value[1]))
+            elif int(key) in [5, 15, 27]:
+                self.generated.append(Location(streets_list[int(key)], int(key), value[0], False, True, value[1]))
+            else:
+                self.generated.append(Location(streets_list[int(key)], int(key), value[0], False, False, value[1]))
 
     def generate_objects(self, file):
+        """
+        Function that generates objects
+        """
         super().generate_objects(file)

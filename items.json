@@ -236,15 +236,15 @@
 "potions": {
 	"bear potion": {
 		"description":"increases damage by 0.5 for every lost point of health, effect rounds up for a greater value",
-		"price":100
+		"price":15
 		},
 	"porcupine potion": {
 		"description":"increases protection by 0.5 for every lost point of health, effect rounds up for a greater value",
-		"price":100
+		"price":15
 		},
 	"healing potion": {
 		"description":"heals player for 3 hp",
-		"price":50
+		"price":5
 		}
 	}
 }
